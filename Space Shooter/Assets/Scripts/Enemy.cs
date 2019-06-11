@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         scoreBoard = FindObjectOfType<ScoreBoard>();
-        AddNonTriggerBoxCollider();
+        //AddNonTriggerBoxCollider();
     }
 
     private void AddNonTriggerBoxCollider()
