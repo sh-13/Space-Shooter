@@ -1,4 +1,4 @@
-﻿    using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("in ms^-1")] [SerializeField] float ControlSpeed = 20f;
     [Tooltip("in ms^-1")] [SerializeField] float xClamp = 5f;
     [Tooltip("in ms^-1")] [SerializeField] float yClamp = 3f;
+    [SerializeField] GameObject[] guns;
 
     [Header("Screen Position Based")]
     [SerializeField] float pitchPositionFactor = -4f;
@@ -30,8 +31,38 @@ public class PlayerController : MonoBehaviour
         {
             TransformPlayer();
             RotatePlayer();
+            FireGuns();
         }
     }
+
+    private void FireGuns()
+    {
+        if (CrossPlatformInputManager.GetButton("Fire"))
+        {
+            ActivateGun();
+        }
+        else
+        {
+            DeactivateGun();
+        }
+    }
+
+    private void ActivateGun()
+    {
+        foreach (GameObject gun in guns)
+        {
+            gun.SetActive(true);
+        }
+    }
+
+    private void DeactivateGun()
+    {
+        foreach (GameObject gun in guns)
+        {
+            gun.SetActive(false);
+        }
+    }
+
     void OnPlayerDeath()
     {
         isDeath = true;
